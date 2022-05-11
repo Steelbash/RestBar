@@ -1,5 +1,7 @@
 # RestBar
 An addon for Turtle WoW that displays a rest bar.
+It's useful especially when you under tent(s).
+So you known, when you full rested and no need to waste time.
 
 ![Preview1](https://raw.githubusercontent.com/Steelbash/RestBar/main/preview1.png)
 
