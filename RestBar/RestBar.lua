@@ -136,7 +136,6 @@ end)
 
 function frame:ADDON_LOADED()
 	frame:CreateStatusBar()
-	frame:UpdateRestBar()
 end
 
 function frame:UPDATE_EXHAUSTION()
@@ -147,6 +146,11 @@ function frame:PLAYER_UPDATE_RESTING()
     frame:UpdateRestBar()
 end
 
+function frame:PLAYER_ENTERING_WORLD()
+    frame:UpdateRestBar()
+end
+
+
 ------------------------------------------------------------------------
 
 frame:SetScript('OnEvent', function()
@@ -156,6 +160,7 @@ end)
 frame:RegisterEvent("ADDON_LOADED")
 frame:RegisterEvent("UPDATE_EXHAUSTION")
 frame:RegisterEvent("PLAYER_UPDATE_RESTING")
+frame:RegisterEvent("PLAYER_ENTERING_WORLD")
 
 
 SLASH_RESTBAR1 = "/restbar"
