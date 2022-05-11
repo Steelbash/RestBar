@@ -3,6 +3,10 @@ An addon for Turtle WoW that displays a rest bar.
 
 ![Preview1](https://raw.githubusercontent.com/Steelbash/RestBar/main/preview1.png)
 
+For display value in XP, just mouse over the bar.
+
+![Preview2](https://raw.githubusercontent.com/Steelbash/RestBar/main/preview2.png)
+
 
 ## Slash commands
 `/restbar top` - Move the bar above the player frame.
