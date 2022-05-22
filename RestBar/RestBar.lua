@@ -135,7 +135,6 @@ frame:SetScript("OnUpdate", function()
 end)
 
 function frame:ADDON_LOADED()
-	frame:CreateStatusBar()
 end
 
 function frame:UPDATE_EXHAUSTION()
@@ -147,6 +146,7 @@ function frame:PLAYER_UPDATE_RESTING()
 end
 
 function frame:PLAYER_ENTERING_WORLD()
+	frame:CreateStatusBar()
     frame:UpdateRestBar()
 end
 
