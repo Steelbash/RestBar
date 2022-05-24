@@ -87,7 +87,7 @@ function frame:UpdateRestBar()
 	local r = GetXPExhaustion()
 	
 	if r == nil then 
-		return
+		r = 0
     end
     
     if lastRestValue == nil or lastRestValue == 0 then
