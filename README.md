@@ -16,6 +16,6 @@ For display value in XP, just mouse over the bar.
 `/restbar bottom` - Move the bar under the player frame.
 
 ## Install
-1. [Download RestBar](https://github.com/Steelbash/RestBar/releases/download/1.0.2/RestBar_v1.0.2.zip)
+1. [Download RestBar](https://github.com/Steelbash/RestBar/releases/download/1.0.3/RestBar_v1.0.3.zip)
 2. Extract the zip to Interface/AddOns folder
 3. Restart Wow
