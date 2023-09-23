@@ -11,9 +11,10 @@ For display value in XP, just mouse over the bar.
 
 
 ## Slash commands
-`/restbar top` - Move the bar above the player frame.
-
-`/restbar bottom` - Move the bar under the player frame.
+- `/restbar top` - Move the bar above the player frame.
+- `/restbar bottom` - Move the bar under the player frame.
+- `/restbar quiet` - Hide text and ticks
+- `/restbar verbose` - Show text and ticks
 
 ## Install
 1. [Download RestBar](https://github.com/Steelbash/RestBar/releases/download/1.0.3/RestBar_v1.0.3.zip)

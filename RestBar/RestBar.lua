@@ -22,6 +22,16 @@ function RB_SetPosition(msg)
 		frame:CreateStatusBar()
 		frame:UpdateRestBar()
 	end
+
+	if msg == "verbose" then
+		RT_STATUS_BAR_VERBOSE = true
+		frame:UpdateRestBar()
+	end
+
+	if msg == "quiet" then
+		RT_STATUS_BAR_VERBOSE = false
+		frame:UpdateRestBar()
+	end
 end
 
 function frame:CreateStatusBar()
@@ -59,8 +69,12 @@ function frame:CreateStatusBar()
 	uiStatusBar.tick = tick
 
     uiStatusBar:ClearAllPoints()
-    
-    if RT_STATUS_BAR_POS == nil then	
+
+	if RT_STATUS_BAR_VERBOSE == nil then
+		RT_STATUS_BAR_VERBOSE = true
+	end
+
+    if RT_STATUS_BAR_POS == nil then
         RT_STATUS_BAR_POS = "top"
     end
 
@@ -102,7 +116,7 @@ function frame:UpdateRestBar()
 	local diffValue = r - lastRestValue
 	lastRestValue = r
 	
-	if diffValue ~= 0 then
+	if diffValue ~= 0 and RT_STATUS_BAR_VERBOSE then
 		tickShowTime = GetTime()
 		if diffValue > 0 then
 		    uiStatusBar.tick:SetText("+"..diffValue.." rest")
@@ -111,12 +125,14 @@ function frame:UpdateRestBar()
 		end
 		uiStatusBar.tick:Show()
 	end
-	
+
 	if mouseOverFlag then
 		uiStatusBar.text:SetText(r)
-    else
-        uiStatusBar.text:SetText(math.floor(r/maxValue*100).."%")
-    end
+	elseif RT_STATUS_BAR_VERBOSE then
+		uiStatusBar.text:SetText(math.floor(r/maxValue*100).."%")
+	else
+		uiStatusBar.text:SetText("")
+	end
 end
 
 frame:SetScript("OnUpdate", function()

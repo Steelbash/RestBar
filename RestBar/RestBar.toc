@@ -1,7 +1,7 @@
 ## Interface: 11200
 ## Title: RestBar
-## Version: 1.0.3
-## SavedVariablesPerCharacter: RT_STATUS_BAR_POS
+## Version: 1.0.4
+## SavedVariablesPerCharacter: RT_STATUS_BAR_POS, RT_STATUS_BAR_VERBOSE
 
 RestBar.lua
 
