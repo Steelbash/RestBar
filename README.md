@@ -9,6 +9,9 @@ For display value in XP, just mouse over the bar.
 
 ![Preview2](https://raw.githubusercontent.com/Steelbash/RestBar/main/preview2.png)
 
+You can also see how much time is left and the number of tents.
+
+![Preview3](https://raw.githubusercontent.com/Steelbash/RestBar/main/preview3.png)
 
 ## Slash commands
 `/restbar top` - Move the bar above the player frame.
