@@ -25,6 +25,6 @@ XPerl support
 `/restbar bottom` - Move the bar under the player frame.
 
 ## Install
-1. [Download RestBar](https://github.com/Steelbash/RestBar/releases/download/1.1.1/RestBar_v1.1.1.zip)
+1. [Download RestBar](https://github.com/Steelbash/RestBar/releases/download/1.2.1/RestBar_v1.2.1.zip)
 2. Extract the zip to Interface/AddOns folder
 3. Restart Wow
