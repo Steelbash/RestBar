@@ -13,6 +13,12 @@ You can also see how much time is left and the number of tents.
 
 ![Preview3](https://raw.githubusercontent.com/Steelbash/RestBar/main/preview3.png)
 
+XPerl support 
+
+![XPerlTop](https://raw.githubusercontent.com/Steelbash/RestBar/main/xperl_top.png)
+
+![XPerlBottom](https://raw.githubusercontent.com/Steelbash/RestBar/main/xperl_bottom.png)
+
 ## Slash commands
 `/restbar top` - Move the bar above the player frame.
 
