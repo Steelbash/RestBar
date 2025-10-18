@@ -3,6 +3,7 @@ local frame = CreateFrame('FRAME', 'RestBarFrame');
 local rbUpdatePeriod = 0.1      -- update bar period
 local rbLastUpdateTime = 0.0
 
+local mainFrame = nil
 local uiStatusBar = nil
 local lastRestValue = 0
 
@@ -13,14 +14,81 @@ local amountRestOverTime = 0
 local tickRestCalcTime = 5       -- calc rest period
 
 
-function frame:CreateStatusBar()
-    if uiStatusBar ~= nil then
-		uiStatusBar:Hide()
-    end
-    
-	uiStatusBar = CreateFrame("StatusBar", nil, PlayerFrame, "TextStatusBar")
-	uiStatusBar:SetWidth(100)
-	uiStatusBar:SetHeight(12)
+function frame:CreateXPerlStatusBar()
+	mainFrame = CreateFrame("Frame", nil, XPerl_Player_PortraitFrame)
+	mainFrame:SetWidth(160)
+	mainFrame:SetHeight(22)
+
+	mainFrame:SetBackdrop({
+		bgFile = "Interface\\Addons\\XPerl\\Images\\XPerl_FrameBack",
+		edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border",
+		tile = true,
+		tileSize = 32,
+		edgeSize = 16,
+		insets = {
+			left = 5,
+			right = 5,
+			top = 5,
+			bottom = 5
+		}
+	})
+
+	mainFrame:SetBackdropColor(0, 0, 0, 1)
+	mainFrame:SetBackdropBorderColor(1, 1, 1, 1)
+	
+	
+	uiStatusBar = CreateFrame("StatusBar", nil, mainFrame, "TextStatusBar")
+	uiStatusBar:SetPoint("TOPLEFT", mainFrame, "TOPLEFT", 6, -6)
+	uiStatusBar:SetPoint("BOTTOMRIGHT", mainFrame, "BOTTOMRIGHT", -6, 6)
+	
+	uiStatusBar:SetStatusBarTexture(XPerl_GetBarTexture())
+	uiStatusBar:SetStatusBarColor(255, 0, 255)
+	
+	local text = uiStatusBar:CreateFontString(nil, "OVERLAY")
+	text:SetPoint("CENTER", 0, 0)
+	text:SetFont(STANDARD_TEXT_FONT, 8, "OUTLINE")
+	uiStatusBar.text = text
+	
+	local bg = uiStatusBar:CreateTexture(nil, "BACKGROUND")
+	bg:SetAllPoints(uiStatusBar)
+	bg:SetTexture(TEXTURE)
+	bg:SetVertexColor(0, 0, 0, 0.5)
+	uiStatusBar.bg = bg
+	
+	local tents = uiStatusBar:CreateFontString(nil, "OVERLAY", "GameFontGreen")
+	tents:SetPoint("LEFT", 153, 0)
+	tents:SetFont(STANDARD_TEXT_FONT, 12, "OUTLINE")
+	uiStatusBar.tents = tents
+	
+	
+	local timeLeft = uiStatusBar:CreateFontString(nil, "OVERLAY")
+	timeLeft:SetPoint("RIGHT", uiStatusBar, "RIGHT", -5, 0)
+	timeLeft:SetFont(STANDARD_TEXT_FONT, 8, "OUTLINE")
+	uiStatusBar.timeLeft = timeLeft
+	
+	if RT_STATUS_BAR_POS == nil then	
+		RT_STATUS_BAR_POS = "top"
+	end
+
+	if RT_STATUS_BAR_POS == "top" then
+		mainFrame:SetPoint("BOTTOMLEFT", XPerl_Player_PortraitFrame, "TOPRIGHT", -3, -3)
+	end
+	
+	if RT_STATUS_BAR_POS == "bottom" then
+		mainFrame:SetPoint("TOPLEFT", XPerl_Player_StatsFrame, "BOTTOMLEFT", 0, 2)
+	end
+	
+	uiStatusBar:SetValue(0)
+end	
+
+
+function frame:CreateClassicStatusBar()
+	mainFrame = CreateFrame("Frame", nil, PlayerFrame)
+	mainFrame:SetWidth(100)
+	mainFrame:SetHeight(12)
+
+	uiStatusBar = CreateFrame("StatusBar", nil, mainFrame, "TextStatusBar")
+	uiStatusBar:SetAllPoints()
 	uiStatusBar:SetStatusBarTexture("Interface\\TargetingFrame\\UI-StatusBar")
 	uiStatusBar:SetStatusBarColor(255, 0, 255)
 
@@ -52,26 +120,37 @@ function frame:CreateStatusBar()
 	timeLeft:SetFont(STANDARD_TEXT_FONT, 8, "OUTLINE")
 	uiStatusBar.timeLeft = timeLeft
 
-	uiStatusBar:ClearAllPoints()
+	mainFrame:ClearAllPoints()
 	
 	if RT_STATUS_BAR_POS == nil then	
 		RT_STATUS_BAR_POS = "top"
 	end
 
 	if RT_STATUS_BAR_POS == "top" then
-		uiStatusBar:SetPoint("TOPLEFT", 114, -10)
+		mainFrame:SetPoint("TOPLEFT", 114, -10)
 		uiStatusBar.bd:SetPoint("TOPLEFT", -10, 4)
 		uiStatusBar.bd:SetTexCoord(0.0234375, 0.6875, 0.0, 1.0)
 	end
 	
 	if RT_STATUS_BAR_POS == "bottom" then
-		uiStatusBar:SetPoint("BOTTOMLEFT", 114, 23)
+		mainFrame:SetPoint("BOTTOMLEFT", 114, 23)
 		uiStatusBar.bd:SetPoint("TOPLEFT", -12, 0)
 		uiStatusBar.bd:SetTexCoord(0.0234375, 0.6875, 1.0, 0.0)
 	end
 	
 	uiStatusBar:SetValue(0)
-	uiStatusBar:Show()
+end
+
+function frame:CreateStatusBar()
+    if mainFrame ~= nil then
+		mainFrame:Hide()
+    end
+    
+    if XPerl_Player then 
+		frame:CreateXPerlStatusBar()
+	else
+		frame:CreateClassicStatusBar()
+	end
 end
 
 function frame:UpdateRestBar()
@@ -82,8 +161,8 @@ function frame:UpdateRestBar()
 	local timeForFullRest = 0
 	
 	if (UnitLevel("player") == 60) then
-		if uiStatusBar:IsVisible() then
-			uiStatusBar:Hide()
+		if mainFrame:IsVisible() then
+			mainFrame:Hide()
 		end
 		return
     end
